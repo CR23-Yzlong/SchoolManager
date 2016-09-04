@@ -1,0 +1,57 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: ThreadPools - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSPAF63.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /FR"Debug/" /Fp"Debug/ThreadPools.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Users\Administrator\Desktop\Project\ThreadPools\ICommand.cpp"
+"C:\Users\Administrator\Desktop\Project\ThreadPools\LoginCmd.cpp"
+"C:\Users\Administrator\Desktop\Project\ThreadPools\MsgCmd.cpp"
+"C:\Users\Administrator\Desktop\Project\ThreadPools\ThreadPool.cpp"
+"C:\Users\Administrator\Desktop\Project\ThreadPools\ThreadPools.cpp"
+]
+Creating command line "cl.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSPAF63.tmp" 
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSPAF64.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /FR"Debug/" /Fp"Debug/ThreadPools.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Users\Administrator\Desktop\Project\ThreadPools\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSPAF64.tmp" 
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSPAF65.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/ThreadPools.pdb" /debug /machine:I386 /out:"Debug/ThreadPools.exe" /pdbtype:sept 
+.\Debug\ICommand.obj
+.\Debug\LoginCmd.obj
+.\Debug\MsgCmd.obj
+.\Debug\StdAfx.obj
+.\Debug\ThreadPool.obj
+.\Debug\ThreadPools.obj
+]
+Creating command line "link.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSPAF65.tmp"
+<h3>Output Window</h3>
+Compiling...
+StdAfx.cpp
+Compiling...
+ICommand.cpp
+LoginCmd.cpp
+MsgCmd.cpp
+ThreadPool.cpp
+ThreadPools.cpp
+Generating Code...
+Linking...
+Creating command line "bscmake.exe /nologo /o"Debug/ThreadPools.bsc"  .\Debug\StdAfx.sbr .\Debug\ICommand.sbr .\Debug\LoginCmd.sbr .\Debug\MsgCmd.sbr .\Debug\ThreadPool.sbr .\Debug\ThreadPools.sbr"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+ThreadPools.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
