@@ -118,7 +118,6 @@ protected:
     
     CEvent      m_Event;                            //事件锁
 
-protected:
     BOOL    m_bIsServer;                    //是否为服务端
 
     //WSAStartup    Begin
@@ -129,7 +128,6 @@ protected:
 
     BOOL    InitSocketWSA();       //初始化套接字环境
     BOOL    DestroySocketWSA();    //关闭套接字环境
-    BOOL    DestroySocket();       //关闭所有套接字
 
     LPCTSTR ConvertErrorMsg(int nErrorCode);       //转换错误码
 

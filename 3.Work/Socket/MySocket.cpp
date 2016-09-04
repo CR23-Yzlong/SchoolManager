@@ -30,6 +30,7 @@ CMySocket::CMySocket()
 CMySocket::~CMySocket()
 {
     DestroySocketWSA();
+    OutputErrorMsg(TEXT("~CMySocket: 结束Socket"));
 }
 BOOL CMySocket::InitSocketWSA()      //初始化套接字环境
 {
@@ -43,7 +44,7 @@ BOOL CMySocket::InitSocketWSA()      //初始化套接字环境
         if ( m_err != 0 ) {
             /* Tell the user that we could not find a usable */
             /* WinSock DLL.                                  */
-            OutputDebugString(TEXT("初始化Socket环境失败！"));
+            OutputErrorMsg(TEXT("初始化Socket环境失败！"));
             return FALSE;
         }
         
@@ -58,7 +59,7 @@ BOOL CMySocket::InitSocketWSA()      //初始化套接字环境
             /* Tell the user that we could not find a usable */
             /* WinSock DLL.                                  */
             ::WSACleanup( );
-            OutputDebugString(TEXT("初始化Socket环境失败！"));
+            OutputErrorMsg(TEXT("初始化Socket环境失败！"));
             return FALSE; 
         }
         
@@ -237,6 +238,10 @@ BOOL CMySocket::StartServer(UINT nSocketPort, LPCTSTR lpszSocketAddress, int nSo
         OutputErrorMsg(GetErrorMsg());
         return FALSE;
     }
+    else
+    {
+        OutputErrorMsg(TEXT("StartServer: 初始化Socket成功"));
+    }
     
     //创建套接字
     if(!Create(nSocketPort, lpszSocketAddress, nSocketType))
@@ -245,12 +250,33 @@ BOOL CMySocket::StartServer(UINT nSocketPort, LPCTSTR lpszSocketAddress, int nSo
         OutputErrorMsg(GetErrorMsg());
         return FALSE;
     }
+    else
+    {
+        OutputErrorMsg(TEXT("StartServer: 创建成功"));
+    }
 
     //绑定端口
-    Bind();
+    if(!Bind())
+    {
+        OutputErrorMsg(GetErrorMsg());
+        return FALSE;
+    }
+    else
+    {
+        OutputErrorMsg(TEXT("StartServer: 绑定成功"));
+    }
+    
 
     //监听
-    Listen();
+    if(!Listen())
+    {
+        OutputErrorMsg(GetErrorMsg());
+        return FALSE;
+    }
+    else
+    {
+        OutputErrorMsg(TEXT("StartServer: 监听成功"));
+    }
 
     return TRUE;
 }
@@ -263,6 +289,10 @@ BOOL CMySocket::StartClient(UINT nSocketPort, LPCTSTR lpszSocketAddress, int nSo
         OutputErrorMsg(GetErrorMsg());
         return FALSE;
     }
+    else
+    {
+        OutputErrorMsg(TEXT("StartClient: 初始化Socket成功"));
+    }
     
     //创建套接字
     if(!Create(nSocketPort, lpszSocketAddress, nSocketType))
@@ -271,9 +301,21 @@ BOOL CMySocket::StartClient(UINT nSocketPort, LPCTSTR lpszSocketAddress, int nSo
         OutputErrorMsg(GetErrorMsg());
         return FALSE;
     }
+    else
+    {
+        OutputErrorMsg(TEXT("StartClient: 创建套接字成功"));
+    }
 
     //连接服务器
-    Connect();
+    if(!Connect())
+    {
+        OutputErrorMsg(GetErrorMsg());
+        return FALSE;
+    }
+    else
+    {
+        OutputErrorMsg(TEXT("StartClient: 连接成功"));
+    }
 
     //发送
 
