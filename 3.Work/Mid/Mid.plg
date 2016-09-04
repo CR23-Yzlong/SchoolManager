@@ -1,0 +1,34 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Mid - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSP9F46.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /Fp"Debug/Mid.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\Project\3.Work\Mid\Mid.cpp"
+"D:\Project\3.Work\Mid\MidDlg.cpp"
+"D:\Project\3.Work\AddIn\MySocket.cpp"
+]
+Creating command line "cl.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSP9F46.tmp" 
+Creating command line "link.exe /nologo /subsystem:windows /incremental:yes /pdb:"Debug/Mid.pdb" /debug /machine:I386 /out:"Debug/Mid.exe" /pdbtype:sept  .\Debug\Mid.obj .\Debug\MidDlg.obj .\Debug\MySocket.obj .\Debug\StdAfx.obj .\Debug\Mid.res "
+<h3>Output Window</h3>
+Compiling...
+Mid.cpp
+Generating Code...
+Compiling...
+MidDlg.cpp
+MySocket.cpp
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+Mid.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

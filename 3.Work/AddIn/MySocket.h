@@ -10,6 +10,7 @@
 #endif // _MSC_VER > 1000
 
 #include <AFXMT.H>
+#include <AFXWIN.H>
 
 #include <Winsock2.h>
 #include <STRING>

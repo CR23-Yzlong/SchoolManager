@@ -1,24 +1,24 @@
-# Microsoft Developer Studio Project File - Name="Client" - Package Owner=<4>
+# Microsoft Developer Studio Project File - Name="Mid" - Package Owner=<4>
 # Microsoft Developer Studio Generated Build File, Format Version 6.00
 # ** DO NOT EDIT **
 
 # TARGTYPE "Win32 (x86) Application" 0x0101
 
-CFG=Client - Win32 Debug
+CFG=Mid - Win32 Debug
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
 !MESSAGE 
-!MESSAGE NMAKE /f "Client.mak".
+!MESSAGE NMAKE /f "Mid.mak".
 !MESSAGE 
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
 !MESSAGE 
-!MESSAGE NMAKE /f "Client.mak" CFG="Client - Win32 Debug"
+!MESSAGE NMAKE /f "Mid.mak" CFG="Mid - Win32 Debug"
 !MESSAGE 
 !MESSAGE Possible choices for configuration are:
 !MESSAGE 
-!MESSAGE "Client - Win32 Release" (based on "Win32 (x86) Application")
-!MESSAGE "Client - Win32 Debug" (based on "Win32 (x86) Application")
+!MESSAGE "Mid - Win32 Release" (based on "Win32 (x86) Application")
+!MESSAGE "Mid - Win32 Debug" (based on "Win32 (x86) Application")
 !MESSAGE 
 
 # Begin Project
@@ -29,7 +29,7 @@ CPP=cl.exe
 MTL=midl.exe
 RSC=rc.exe
 
-!IF  "$(CFG)" == "Client - Win32 Release"
+!IF  "$(CFG)" == "Mid - Win32 Release"
 
 # PROP BASE Use_MFC 6
 # PROP BASE Use_Debug_Libraries 0
@@ -54,7 +54,7 @@ LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /machine:I386
 # ADD LINK32 /nologo /subsystem:windows /machine:I386
 
-!ELSEIF  "$(CFG)" == "Client - Win32 Debug"
+!ELSEIF  "$(CFG)" == "Mid - Win32 Debug"
 
 # PROP BASE Use_MFC 6
 # PROP BASE Use_Debug_Libraries 1
@@ -84,22 +84,22 @@ LINK32=link.exe
 
 # Begin Target
 
-# Name "Client - Win32 Release"
-# Name "Client - Win32 Debug"
+# Name "Mid - Win32 Release"
+# Name "Mid - Win32 Debug"
 # Begin Group "Source Files"
 
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
-SOURCE=.\Client.cpp
+SOURCE=.\Mid.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Client.rc
+SOURCE=.\Mid.rc
 # End Source File
 # Begin Source File
 
-SOURCE=.\ClientDlg.cpp
+SOURCE=.\MidDlg.cpp
 # End Source File
 # Begin Source File
 
@@ -116,11 +116,11 @@ SOURCE=.\StdAfx.cpp
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
 
-SOURCE=.\Client.h
+SOURCE=.\Mid.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\ClientDlg.h
+SOURCE=.\MidDlg.h
 # End Source File
 # Begin Source File
 
@@ -140,11 +140,11 @@ SOURCE=.\StdAfx.h
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 # Begin Source File
 
-SOURCE=.\res\Client.ico
+SOURCE=.\res\Mid.ico
 # End Source File
 # Begin Source File
 
-SOURCE=.\res\Client.rc2
+SOURCE=.\res\Mid.rc2
 # End Source File
 # End Group
 # Begin Source File

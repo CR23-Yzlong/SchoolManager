@@ -50,7 +50,7 @@ BEGIN
     "LANGUAGE 4, 2\r\n"
     "#pragma code_page(936)\r\n"
     "#endif //_WIN32\r\n"
-    "#include ""res\\Client.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""res\\Mid.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
     "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
     "#endif\r\n"
     "\0"
@@ -66,7 +66,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON    DISCARDABLE     "res\\Client.ico"
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\Mid.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -75,22 +75,36 @@ IDR_MAINFRAME           ICON    DISCARDABLE     "res\\Client.ico"
 
 IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 55
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "关于 Client"
+CAPTION "关于 Mid"
 FONT 9, "宋体"
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
-    LTEXT           "Client 1.0 版",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "Mid 1.0 版",IDC_STATIC,40,10,119,8,SS_NOPREFIX
     LTEXT           "版权所有 (C) 2016",IDC_STATIC,40,25,119,8
     DEFPUSHBUTTON   "确定",IDOK,178,7,50,14,WS_GROUP
 END
 
-IDD_CLIENT_DIALOG DIALOGEX 0, 0, 444, 315
+IDD_MID_DIALOG DIALOGEX 0, 0, 367, 273
 STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
     WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
-CAPTION "Client"
+CAPTION "Mid"
 FONT 9, "宋体"
 BEGIN
+    PUSHBUTTON      "连接服务端",IDC_BTN_SERVER_CONNECT,54,51,50,14,WS_GROUP
+    PUSHBUTTON      "开启服务",IDC_BTN_CLIENT_SERVER,54,175,50,14,WS_GROUP
+    PUSHBUTTON      "结束服务",IDC_BTN_CLIENT_OVER,54,211,50,14,WS_DISABLED | 
+                    WS_GROUP
+    PUSHBUTTON      "断开服务端",IDC_BTN_SERVER_BREAK,54,86,50,14,
+                    WS_DISABLED | WS_GROUP
+    GROUPBOX        "对接服务端",IDC_STATIC,22,22,323,107,BS_CENTER | 
+                    WS_GROUP
+    GROUPBOX        "对接客户端",IDC_STATIC,22,144,323,107,BS_CENTER | 
+                    WS_GROUP
+    CTEXT           "请开启服务...",IDC_STATIC_CLIENTINFO,143,175,165,49,
+                    SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "请连接服务端...",IDC_STATIC_SERVERINFO,143,52,165,49,
+                    SS_CENTERIMAGE | SS_SUNKEN
 END
 
 
@@ -118,13 +132,13 @@ BEGIN
         BLOCK "080404B0"
         BEGIN
             VALUE "CompanyName", "\0"
-            VALUE "FileDescription", "Client Microsoft 基础类应用程序\0"
+            VALUE "FileDescription", "Mid Microsoft 基础类应用程序\0"
             VALUE "FileVersion", "1, 0, 0, 1\0"
-            VALUE "InternalName", "Client\0"
+            VALUE "InternalName", "Mid\0"
             VALUE "LegalCopyright", "版权所有 (C) 2016\0"
             VALUE "LegalTrademarks", "\0"
-            VALUE "OriginalFilename", "Client.EXE\0"
-            VALUE "ProductName", "Client 应用程序\0"
+            VALUE "OriginalFilename", "Mid.EXE\0"
+            VALUE "ProductName", "Mid 应用程序\0"
             VALUE "ProductVersion", "1, 0, 0, 1\0"
         END
     END
@@ -153,12 +167,12 @@ BEGIN
         BOTTOMMARGIN, 48
     END
 
-    IDD_CLIENT_DIALOG, DIALOG
+    IDD_MID_DIALOG, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 437
+        RIGHTMARGIN, 360
         TOPMARGIN, 7
-        BOTTOMMARGIN, 308
+        BOTTOMMARGIN, 266
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -171,7 +185,7 @@ END
 
 STRINGTABLE DISCARDABLE 
 BEGIN
-    IDS_ABOUTBOX            "关于 Client(&A)..."
+    IDS_ABOUTBOX            "关于 Mid(&A)..."
 END
 
 #endif    // Chinese (P.R.C.) resources
@@ -194,7 +208,7 @@ END
 LANGUAGE 4, 2
 #pragma code_page(936)
 #endif //_WIN32
-#include "res\Client.rc2"  // non-Microsoft Visual C++ edited resources
+#include "res\Mid.rc2"  // non-Microsoft Visual C++ edited resources
 #include "l.chs\afxres.rc"          // Standard components
 #endif
 
