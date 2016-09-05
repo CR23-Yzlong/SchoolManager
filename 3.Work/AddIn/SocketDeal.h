@@ -13,15 +13,15 @@ enum PACKET_FLAG
 
     //client -> server 
     CLIENT_LOGIN,               //登陆请求
-    CLIENT_MSG_ADD,             //向服务器发送增加消息
-    CLIENT_MSG_SEARCH,          //向服务器发送查找消息
+    CLIENT_MSG_INSERT,          //向服务器发送增加消息
+    CLIENT_MSG_QUERY,           //向服务器发送查找消息
     CLIENT_MSG_DEL,             //向服务器发送删除消息
     CLIENT_MSG_ALTER,           //向服务器发送修改消息
     
     //server -> client
     SERVER_LOGINREPLY,          //服务器登陆回复
-    SERVER_REPLY_ADD,           //服务器接收增加信息回复
-    SERVER_REPLY_SEARCH,        //服务器接收查找信息回复
+    SERVER_REPLY_INSERT,        //服务器接收增加信息回复
+    SERVER_REPLY_QUERY,         //服务器接收查找信息回复
     SERVER_REPLY_DEL,           //服务器接收删除信息回复
     SERVER_REPLY_ALTER,         //服务器接收修改信息回复
 
@@ -44,6 +44,7 @@ m_strTips = _T("");
 //客户端数据信息
 typedef struct _TagClientDataLength
 {
+    DWORD   dwSize;         //所有长度之和
     CHAR    cSidLen;        //长度：学生ID
     CHAR    cSNameLen;      //长度：学生名
     CHAR    cSgenderLen;    //长度：学生性别
@@ -52,8 +53,8 @@ typedef struct _TagClientDataLength
     CHAR    cCidLen;        //长度：班级ID
     CHAR    cCnameLen;      //长度：班级名
 
-    PTCHAR  pszData;        //数据集合
-}CDataInfo, *PCDataInfo;
+    LPTSTR  pszData;        //数据集合
+}TagCDataInfo, *PTagCDataInfo;
 
 
 //发送的协议
@@ -62,7 +63,7 @@ typedef struct  _TagClientMidDeal
     PACKET_FLAG flag;       //定义消息码
     DWORD       dwSize;     //数据长度
     PTCHAR      pszBuf;     //数据
-}CMDeal, *PCMDeal;
+}TagCMDeal, *PTagCMDeal;
 
 //发送的协议
 typedef struct  _TagServerMidDeal
@@ -70,7 +71,7 @@ typedef struct  _TagServerMidDeal
     PACKET_FLAG flag;       //定义消息码
     DWORD       dwSize;     //数据长度
     PTCHAR      pszBuf;     //数据
-}SMDeal, *PSMDeal;
+}TagSMDeal, *PTagSMDeal;
 
 
 

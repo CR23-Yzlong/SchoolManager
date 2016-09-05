@@ -75,17 +75,29 @@ CClientDlg::CClientDlg(CWnd* pParent /*=NULL*/)
 	// Note that LoadIcon does not require a subsequent DestroyIcon in Win32
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 
+    //服务器初始为未连接
     bIsServerConnect = FALSE;
 
+    //初始化用于传输的数据信息
     memset(&m_ClientInfo, 0, sizeof(m_ClientInfo));
+    //用于传输的Buf
+    strPutBuf = TEXT("");
 
+    //初始化
     m_FunMenu.LoadMenu(IDR_MENU_FUN);
+
+    //解锁
+    #define OPERATED_LOCK      TRUE            //上锁
+    #define OPERATED_UNLOCK    FALSE           //解锁
+    bIsOperated = OPERATED_UNLOCK;
+
 }
 
 void CClientDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CClientDlg)
+	DDX_Control(pDX, IDC_STATIC_TIPS, m_TipsCtl);
 	DDX_Control(pDX, IDC_LIST_RESULT, m_ListCTL);
 	DDX_Text(pDX, IDC_EDIT_SNAME, m_strSname);
 	DDX_Text(pDX, IDC_EDIT_SID, m_strSid);
@@ -206,28 +218,159 @@ HCURSOR CClientDlg::OnQueryDragIcon()
 	return (HCURSOR) m_hIcon;
 }
 
+BOOL CClientDlg::SubmitData(DWORD dwFlag) 
+{
+    BOOL bRet = FALSE;
+
+    //拼接提交信息
+    CString strBuf = TEXT("");
+    
+    strBuf = strBuf + m_strSid
+                    + m_strSname
+                    + m_strSgender
+                    + m_strCouID
+                    + m_strCouName
+                    + m_strCid
+                    + m_strCname;
+    
+    //完成
+    m_ClientInfo.pszData = strBuf.GetBuffer(0);
+    
+    TagCMDeal SendData;
+    SendData.flag = (PACKET_FLAG)dwFlag;
+    SendData.dwSize = m_ClientInfo.dwSize;
+    SendData.pszBuf = m_ClientInfo.pszData;
+    
+    //发送头
+    bRet = m_Sock.SendAll(m_Sock.GetMainSock(),
+                           (char*)&SendData,
+                           sizeof(TagCMDeal) - sizeof(PTCHAR));
+    
+    //发送数据
+    bRet = m_Sock.SendAll(m_Sock.GetMainSock(),
+                           SendData.pszBuf,
+                           SendData.dwSize);
+
+    m_strTips = TEXT("从服务器获取数据中...");
+    m_TipsCtl.SetWindowText(m_strTips);
+
+    return bRet;
+}
+
 void CClientDlg::OnBtnInsert() 
 {
-	// TODO: Add your control notification handler code here
-	
+	//检查连接状态
+    if(!GetConnectStatus())
+        return;
+
+    //检查操作同步,检查提交信息
+    if(!GetEditInfo())
+        return;
+
+    //此次操作未完成，则锁住
+    bIsOperated = OPERATED_LOCK;
+    
+    //发送数据
+    if(!SubmitData(CLIENT_MSG_INSERT))
+    {
+        return;
+    }
+
+    //接收数据
+    
+    //用完解锁
+    //bIsOperated = OPERATED_UNLOCK;
+    
+    //清空Edit数据
+    InitEdit();
+    UpdateData(FALSE);
 }
 
 void CClientDlg::OnBtnDel() 
 {
-	// TODO: Add your control notification handler code here
-	int i = 0;
+	//检查连接状态
+    if(!GetConnectStatus())
+        return;
+    
+    //检查操作同步,检查提交信息
+    if(!GetEditInfo())
+        return;
+    
+    //此次操作未完成，则锁住
+    bIsOperated = OPERATED_LOCK;
+    
+    //发送数据
+    if(!SubmitData(CLIENT_MSG_DEL))
+    {
+        return;
+    }
+    
+    //接收数据
+    
+    //用完解锁
+    //bIsOperated = OPERATED_UNLOCK;
+    
+    //清空Edit数据
+    InitEdit();
+    UpdateData(FALSE);
 }
 
 void CClientDlg::OnBtnQuery() 
 {
-	// TODO: Add your control notification handler code here
-	
+	//检查连接状态
+    if(!GetConnectStatus())
+        return;
+    
+    //检查操作同步,检查提交信息
+    if(!GetEditInfo())
+        return;
+    
+    //此次操作未完成，则锁住
+    bIsOperated = OPERATED_LOCK;
+    
+    //发送数据
+    if(!SubmitData(CLIENT_MSG_QUERY))
+    {
+        return;
+    }
+    
+    //接收数据
+    
+    //用完解锁
+    //bIsOperated = OPERATED_UNLOCK;
+
+    //清空Edit数据
+    InitEdit();
+    UpdateData(FALSE);
 }
 
 void CClientDlg::OnBtnAlter() 
 {
-	// TODO: Add your control notification handler code here
-	int i = 0;
+	//检查连接状态
+    if(!GetConnectStatus())
+        return;
+
+    //检查操作同步,检查提交信息
+    if(!GetEditInfo())
+        return;
+    
+    //此次操作未完成，则锁住
+    bIsOperated = OPERATED_LOCK;
+    
+    //发送数据
+    if(!SubmitData(CLIENT_MSG_ALTER))
+    {
+        return;
+    }
+    
+    //接收数据
+    
+    //用完解锁
+    //bIsOperated = OPERATED_UNLOCK;
+
+    //清空Edit数据
+    InitEdit();
+    UpdateData(FALSE);
 }
 
 BOOL CClientDlg::DestroyWindow() 
@@ -240,13 +383,39 @@ BOOL CClientDlg::DestroyWindow()
 	return CDialog::DestroyWindow();
 }
 
+BOOL CClientDlg::GetConnectStatus() CONST
+{
+    //判断服务器是否在线
+    if(!bIsServerConnect)
+    {
+        AfxMessageBox(TEXT("服务器未连接，请连接服务器！"));
+        CMySocket::OutputErrorMsg(TEXT("按钮触发：服务器未连接"));
+        return FALSE;
+    }
+    return TRUE;
+}
+
 BOOL CClientDlg::GetEditInfo()
 {
     BOOL bRet = FALSE;
-    
+
+    //检查其他操作是完成
+    if(bIsOperated == OPERATED_LOCK)
+    {
+        AfxMessageBox("有其他操作未完成，请耐心等待..");
+        CMySocket::OutputErrorMsg(TEXT("操作过快: 有其他操作未返回。"));
+        return FALSE;
+    }
+
+    //bIsOperated = OPERATED_UNLOCK;
+
     //更新Edit到本地CString
     UpdateData(TRUE);
 
+    //初始化m_ClientInfo
+    memset(&m_ClientInfo, 0, sizeof(m_ClientInfo));
+
+    //检查提交信息
     if(!m_strSname.IsEmpty())
     {
         m_ClientInfo.cSNameLen = m_strSname.GetLength();
@@ -289,10 +458,26 @@ BOOL CClientDlg::GetEditInfo()
         bRet = TRUE;
     }
 
+    //检查提交数据
+    if(!bRet)
+    {
+        AfxMessageBox(TEXT("提交信息为空，请检查！"));
+        CMySocket::OutputErrorMsg(TEXT("按钮触发：提交信息为空。"));
+    }
+
+    //统计待发送数据总大小
+    m_ClientInfo.dwSize = m_ClientInfo.cSidLen +
+                          m_ClientInfo.cSNameLen +
+                          m_ClientInfo.cSgenderLen +
+                          m_ClientInfo.cCouIDLen +
+                          m_ClientInfo.cCouNameLen +
+                          m_ClientInfo.cCidLen +
+                          m_ClientInfo.cCnameLen;
+
     return bRet;
 }
 
-BOOL CClientDlg::InitCStr()
+BOOL CClientDlg::InitEdit()
 {
     m_strSname      = TEXT("");
     m_strSid        = TEXT("");
@@ -301,7 +486,6 @@ BOOL CClientDlg::InitCStr()
     m_strCouName    = TEXT("");
     m_strCname      = TEXT("");
     m_strCid        = TEXT("");
-	m_strTips       = TEXT("");
 
     return TRUE;
 }
@@ -309,8 +493,6 @@ BOOL CClientDlg::InitCStr()
 
 BOOL CClientDlg::ConnectServer()
 {
-    InitCStr();
-
     if(!m_Sock.StartClient(8080, TEXT("127.0.0.1")))
     {
         return FALSE; 
@@ -320,7 +502,7 @@ BOOL CClientDlg::ConnectServer()
 
 
     m_strTips = TEXT("连接服务器成功！");
-    UpdateData(TRUE);
+    m_TipsCtl.SetWindowText(m_strTips);
 
     return TRUE;
 }

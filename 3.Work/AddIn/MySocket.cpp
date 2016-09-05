@@ -378,7 +378,11 @@ BOOL CMySocket::SendAll(SOCKET sDstScok, _IN_ LPCTSTR pszBuf, DWORD dwSize)
             if (nSendedTmpBytes == SOCKET_ERROR )
             {
                 m_Event.Lock();
+                
                 m_nErrorCode = ::WSAGetLastError();
+                
+                OutputDebugString(GetErrorMsg());
+
                 m_Event.Unlock();
                 __leave;
             }
@@ -430,7 +434,11 @@ BOOL CMySocket::RecvAll(SOCKET sDstScok, _OUT_ std::tstring& strBuf, DWORD dwSiz
             {
                 //保护类中的错误码
                 m_Event.Lock();
+
                 m_nErrorCode = ::WSAGetLastError();
+                
+                OutputDebugString(GetErrorMsg());
+
                 m_Event.Unlock();
                 __leave;
             }

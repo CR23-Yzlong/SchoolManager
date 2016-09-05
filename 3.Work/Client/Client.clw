@@ -29,7 +29,7 @@ Type=0
 HeaderFile=ClientDlg.h
 ImplementationFile=ClientDlg.cpp
 Filter=D
-LastObject=IDC_LIST_RESULT
+LastObject=CClientDlg
 BaseClass=CDialog
 VirtualFilter=dWC
 

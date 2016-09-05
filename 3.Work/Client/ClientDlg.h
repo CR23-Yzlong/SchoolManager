@@ -31,11 +31,20 @@ public:
     BOOL  bIsServerConnect;
 
     //用于发送的数据信息
-    CDataInfo  m_ClientInfo;
+    TagCDataInfo  m_ClientInfo;
 
+    //用于拼接提交信息的Buf
+    CString strPutBuf;
+
+
+    //同步
+    BOOL bIsOperated;
 
     //连接服务器
     BOOL ConnectServer();
+
+    //获取服务器连接状态
+    BOOL GetConnectStatus() CONST;
 
     //获取Edit的信息
     BOOL GetEditInfo();
@@ -43,12 +52,16 @@ public:
     //初始化相关工作
 	BOOL InitSomething();
     
-    //初始化所有的CString
-    BOOL InitCStr();
+    //初始化所有的Edit
+    BOOL InitEdit();
+
+    //按操作码提交Edit信息，
+    BOOL SubmitData(DWORD dwFlag);
     
 // Dialog Data
 	//{{AFX_DATA(CClientDlg)
 	enum { IDD = IDD_CLIENT_DIALOG };
+	CStatic	m_TipsCtl;
 	CListCtrl	m_ListCTL;
 	CString	m_strSname;
 	CString	m_strSid;
