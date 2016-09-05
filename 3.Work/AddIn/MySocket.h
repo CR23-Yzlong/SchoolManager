@@ -58,7 +58,8 @@ public:
     //创建Server， nSocketPort(服务器端口)  lpszSocketAddress(服务器地址) nSocketType(UDP || TCP)
 	BOOL StartServer(UINT nSocketPort, LPCTSTR lpszSocketAddress = NULL, int nSocketType = SOCK_STREAM);
 
-    //等待连接 ,如果有连接，则返回sNewScok = m_NewSock  NewAddr = m_NewAddr
+    //等待连接 ,如果有连接，则返回True, 
+    //调用GetNewSock()获取客户端的Socket,调用GetNewAddr获取客户端的Addr
     BOOL Accept(/*_OUT_ SOCKET& sNewScok, _OUT_ sockaddr_in& NewAddr*/);              
 
     //Send,  失败返回SOCKET_ERROR，可调用GetErrMSG， 成功则返回成功发送字节数

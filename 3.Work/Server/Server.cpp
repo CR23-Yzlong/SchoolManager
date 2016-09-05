@@ -5,7 +5,7 @@
 #include "MyServer.h"
 #include "../AddIn/MySocket.h"
 
-#import "../AddIn/msado15.dll" no_namespace rename("EOF","adoEOF")
+#import "msado15.dll" no_namespace rename("EOF","adoEOF")
 
 //用于初始化COM调用的类
 class CComInit

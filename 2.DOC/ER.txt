@@ -45,6 +45,26 @@ couID(PK FK)  sID(PK FK)    score
 couID(PK)     couName
 
 ==============================================================
+
+Demo2
+
+班级（class）
+班级号     班级名称
+cID(PK)    cName   
+
+学生（student）
+学号          姓名      性别          班级号
+sID(PK)       sName     sGender       cID(FK)
+
+选课表(select course)
+课程ID        学号         
+couID(PK FK)  sID(PK FK)
+
+课程（course）
+课程ID        课程名
+couID(PK)     couName
+
+==============================================================
 1NF:每个字段不可再分割
 
 2NF,如果是复合主键，所有非主键都由复合主键共同决定

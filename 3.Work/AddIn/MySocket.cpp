@@ -165,7 +165,7 @@ BOOL CMySocket::SetAddr(/*sockaddr_in& Addr = m_MainAddr,*/ LPCTSTR pIP, WORD wP
     ::memset(&m_MainAddr, 0, sizeof(sockaddr_in));
     
     m_MainAddr.sin_family = AF_INET;
-    m_MainAddr.sin_port = wPort;
+    m_MainAddr.sin_port = ::htons(wPort);
     m_MainAddr.sin_addr.s_addr = ::inet_addr(pIP);
     return TRUE;
 }
@@ -175,8 +175,8 @@ BOOL CMySocket::SetAddr(/*sockaddr_in& Addr = m_MainAddr,*/ DWORD dwIP, WORD wPo
     ::memset(&m_MainAddr, 0, sizeof(sockaddr_in));
     
     m_MainAddr.sin_family = AF_INET;
-    m_MainAddr.sin_port = htons(wPort);
-    m_MainAddr.sin_addr.s_addr = htonl(dwIP);
+    m_MainAddr.sin_port = ::htons(wPort);
+    m_MainAddr.sin_addr.s_addr = ::htonl(dwIP);
     return TRUE;
 }
 
@@ -341,8 +341,8 @@ INT CMySocket::Recv(SOCKET sDstScok, _OUT_ std::tstring& strBuf, _IN_ DWORD dwSi
 {
     strBuf = TEXT("");
     TCHAR szBuf[MAX_RECV_BYTES] = {0};
+
     int nRet = ::recv(sDstScok, szBuf, dwSize, 0);
-    
     if(nRet == SOCKET_ERROR)
     {
         m_nErrorCode = ::WSAGetLastError();
